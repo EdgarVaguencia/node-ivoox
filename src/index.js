@@ -2,7 +2,7 @@
 var promise = require('bluebird');
 var request = require('request');
 var cheerio = require('cheerio');
-var createError = require('http-errors')
+var createError = require('http-errors');
 
 module.exports = {
 
@@ -20,7 +20,7 @@ module.exports = {
 
   /**
    * Llamada http
-   * @param  {string} url       Enlace de petición
+   * @param  {string} url Enlace de petición
    * @param  {int} list_type Tipo de lista para su formato correcto
    * @return {promise}
    */
@@ -43,7 +43,6 @@ module.exports = {
    * @return {void} Los items son almacenados en audios_list
    */
   audios: function() {
-    var self = this;
     var url = this.urlBase + this.urlAudios;
     return this._request(url, 1);
   },
@@ -53,7 +52,6 @@ module.exports = {
    * @return {Void} Los items son almacenados en podcast_list
    */
   podcasts: function() {
-    var self = this;
     var url = this.urlBase + this.urlPodcasts;
     return this._request(url, 2);
   },
@@ -90,4 +88,4 @@ module.exports = {
     });
     return this.list;
   },
-}
+};
