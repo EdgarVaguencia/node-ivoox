@@ -64,6 +64,7 @@ module.exports = {
    */
   format: function(body, type) {
     var self = this;
+    this.list = [];
     body('.audio_list_item').each(function(k ,i) {
       var img = cheerio(i).find('img.thumb_item');
       if (type === 1) {
@@ -74,7 +75,8 @@ module.exports = {
           'img': img.attr('src'),
           'title': title.text(),
           'author': author.text(),
-          'category': category.text()
+          'category': category.text(),
+          'link': title.attr('href')
         });
       } else if(type === 2){
         var nombre = cheerio(i).find('a.tituloPodcast');
@@ -82,7 +84,8 @@ module.exports = {
         self.list.push({
           'img': img.attr('src'),
           'name': nombre.text(),
-          'audio': audios.text()
+          'audio': audios.text(),
+          'link': nombre.attr('href')
         });
       }
     });
