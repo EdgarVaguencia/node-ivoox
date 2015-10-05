@@ -31,22 +31,22 @@ Example of a response
 ---------------------
 
 ```json
-{
+[
   {
-    author: "Podcast de Vocerrante",
-    category: "Arte y literatura",
-    img: "http://static-1.ivoox.com/audios/1443155227g.jpg",
-    link: "vocerrante016-partes-batalla-audios-mp3_rf_8599612_1.html",
-    title: "Vocerrante016 - Partes de Batalla"
+    "author": "Podcast de Vocerrante",
+    "category": "Arte y literatura",
+    "img": "http://static-1.ivoox.com/audios/1443155227g.jpg",
+    "link": "vocerrante016-partes-batalla-audios-mp3_rf_8599612_1.html",
+    "title": "Vocerrante016 - Partes de Batalla"
   },
   {
-    author: "Enjoy the sound Podcast with.",
-    category: "Electrónica",
-    img: "http://static-1.ivoox.com/audios/1443185336g.jpg",
-    link: "enjoy-the-sound-radioshow-028-ibiza-live-sessions-audios-mp3_rf_8607271_1.html",
-    title: "Enjoy the sound RADIOSHOW #028 IBIZA LIVE SESSIONS - Carl Cox Birthday @ Space Ibiza part2"
+    "author": "Enjoy the sound Podcast with.",
+    "category": "Electrónica",
+    "img": "http://static-1.ivoox.com/audios/1443185336g.jpg",
+    "link": "enjoy-the-sound-radioshow-028-ibiza-live-sessions-audios-mp3_rf_8607271_1.html",
+    "title": "Enjoy the sound RADIOSHOW #028 IBIZA LIVE SESSIONS - Carl Cox Birthday @ Space Ibiza part2"
   }
-}
+]
 ```
 
 

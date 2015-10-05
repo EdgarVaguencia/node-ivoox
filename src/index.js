@@ -65,6 +65,12 @@ module.exports = {
   format: function(body, type) {
     var self = this;
     this.list = [];
+    if (body === undefined) {
+      return 'Falta body'
+    }
+    if (type === undefined) {
+      return 'Falta type'
+    }
     body('.audio_list_item').each(function(k ,i) {
       var img = cheerio(i).find('img.thumb_item');
       if (type === 1) {
@@ -76,7 +82,8 @@ module.exports = {
           'title': title.text(),
           'author': author.text(),
           'category': category.text(),
-          'link': title.attr('href')
+          'link': title.attr('href'),
+          'file': 'http://www.ivoox.com/s_me_' + self.getfile(title.attr('href')) + '_1.html'
         });
       } else if(type === 2){
         var nombre = cheerio(i).find('a.tituloPodcast');
@@ -90,5 +97,19 @@ module.exports = {
       }
     });
     return this.list;
+  },
+
+  /**
+   * Regresa URL del arichivo 
+   * @param  {string} link 
+   * @return {string} fileLink
+   */
+  getfile: function(link) {
+    var fileLink = '';
+    if (link === undefined || typeof link !== 'string') {
+      return new createError('a link is needed');
+    }
+    fileLink = link.split('_');
+    return fileLink[2];
   },
 };
