@@ -18,7 +18,7 @@ Use
 ```javascript
 var ivoox = require('node-ivoox');
 
-ivoox.audios().done(function(data) { console.log(data) });
+ivoox.audios().then(function(data) { console.log(data) }).catch(function(e) { console.error(e); });
 ```
 
 Methods
@@ -26,6 +26,7 @@ Methods
 
 * audios
 * podcasts
+* search
 
 Example of a response
 ---------------------
