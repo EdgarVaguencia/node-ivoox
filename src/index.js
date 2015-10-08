@@ -12,24 +12,19 @@ module.exports = {
 
   urlPodcasts: 'audios_sc_f_1.html?nogallery',
 
-  list: [],
-
-  audio_list: [],
-
-  podcast_list: [],
+  type : 1,
 
   /**
    * Llamada http
-   * @param  {string} url Enlace de petición
-   * @param  {int} list_type Tipo de lista para su formato correcto
    * @return {promise}
    */
-  _request: function(url, list_type){
+  _request: function () {
     var self = this;
     return new promise(function(resolve, reject) {
-      request(url, function(error, response, body) {
+      request.get(self.urlRequest, function(error, response, body) {
         if (response.statusCode === 200) {
-          resolve(self.format(cheerio.load(body), list_type));
+          var data = self.format(cheerio.load(body));
+          resolve(data);
         }else {
           reject(createError(response.statusCode));
         }
@@ -40,20 +35,20 @@ module.exports = {
 
   /**
    * Obtiene los audios de la lista explorar audios
-   * @return {void} Los items son almacenados en audios_list
    */
   audios: function() {
-    var url = this.urlBase + this.urlAudios;
-    return this._request(url, 1);
+    this.urlRequest = this.urlBase + this.urlAudios;
+    this.type = 1;
+    return this._request();
   },
 
   /**
    * Obtiene podcasts de la lista explorar
-   * @return {Void} Los items son almacenados en podcast_list
    */
   podcasts: function() {
-    var url = this.urlBase + this.urlPodcasts;
-    return this._request(url, 2);
+    this.urlRequest = this.urlBase + this.urlPodcasts;
+    this.type = 2;
+    return this._request();
   },
 
   /**
@@ -62,41 +57,43 @@ module.exports = {
    * @param  {int} type
    * @return {array}
    */
-  format: function(body, type) {
+  format: function(body) {
     var self = this;
-    this.list = [];
+    var list = [];
     if (body === undefined) {
-      return 'Falta body'
-    }
-    if (type === undefined) {
-      return 'Falta type'
+      throw new Error('body is needed');
     }
     body('.audio_list_item').each(function(k ,i) {
-      var img = cheerio(i).find('img.thumb_item');
-      if (type === 1) {
-        var title = cheerio(i).find('a.titulo');
-        var author = cheerio(i).find('.categorias a:first-child');
-        var category = cheerio(i).find('.categorias a:last-child');
-        self.list.push({
-          'img': img.attr('src'),
-          'title': title.text(),
-          'author': author.text(),
-          'category': category.text(),
-          'link': title.attr('href'),
-          'file': 'http://www.ivoox.com/s_me_' + self.getfile(title.attr('href')) + '_1.html'
-        });
-      } else if(type === 2){
-        var nombre = cheerio(i).find('a.tituloPodcast');
-        var audios = cheerio(i).find('span.listen_radio');
-        self.list.push({
-          'img': img.attr('src'),
-          'name': nombre.text(),
-          'audio': audios.text(),
-          'link': nombre.attr('href')
-        });
+      if (cheerio(i).attr('id') !== 'adsensem') {
+        var img = cheerio(i).find('img.thumb_item');
+        if (self.type === 1) {
+          var title = cheerio(i).find('a.titulo');
+          var author = cheerio(i).find('.categorias a:first-child');
+          var category = cheerio(i).find('.categorias a:last-child');
+          list.push({
+            'img': img.attr('src'),
+            'title': title.text(),
+            'author': author.text(),
+            'category': category.text(),
+            'link': title.attr('href'),
+            'file': self.urlBase + '/s_me_' + self.getfile(title.attr('href')) + '_1.html'
+          });
+        } else if(self.type === 2 || self.type === 3){
+          var nombre = cheerio(i).find('a.tituloPodcast');
+          var audios = cheerio(i).find('span.listen_radio');
+          list.push({
+            'img': img.attr('src'),
+            'name': nombre.text(),
+            'audio': audios.text(),
+            'link': nombre.attr('href')
+          });
+          if (self.type === 3) {
+            self.type = 1;
+          }
+        }
       }
     });
-    return this.list;
+    return list;
   },
 
   /**
@@ -107,9 +104,22 @@ module.exports = {
   getfile: function(link) {
     var fileLink = '';
     if (link === undefined || typeof link !== 'string') {
-      return new createError('a link is needed');
+      throw new Error('a link is needed');
     }
     fileLink = link.split('_');
     return fileLink[2];
+  },
+
+  /**
+   * Realiza un petición de busqueda
+   * @param topic     parametro de busqueda
+   */
+  search: function(topic) {
+    if (topic === undefined && typeof topic !== 'string') {
+      throw new Error('topic is needed');
+    }
+    this.urlRequest = this.urlBase + topic + '_sb.html';
+    this.type = 3;
+    return this._request();
   },
 };
