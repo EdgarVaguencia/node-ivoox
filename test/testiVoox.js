@@ -46,7 +46,7 @@ describe('iVoox', function() {
 
       it('in search should change type', function() {
         ivoox.search('test');
-        expect(ivoox.type).to.equal(3);
+        expect(ivoox.type).to.equal(1);
       });
     });
 

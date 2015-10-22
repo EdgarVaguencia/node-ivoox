@@ -24,9 +24,9 @@ ivoox.audios().then(function(data) { console.log(data) }).catch(function(e) { co
 Methods
 -------
 
-* audios
-* podcasts
-* search
+* audios()
+* podcasts()
+* search(string)
 
 Example of a response
 ---------------------
@@ -34,20 +34,22 @@ Example of a response
 ```json
 [
   {
-    "author": "Podcast de Vocerrante",
-    "category": "Arte y literatura",
-    "img": "http://static-1.ivoox.com/audios/1443155227g.jpg",
-    "link": "vocerrante016-partes-batalla-audios-mp3_rf_8599612_1.html",
-    "title": "Vocerrante016 - Partes de Batalla",
-    "file": "http://www.ivoox.com/s_me_8599612_1.html"
+    "author": "La Lupa con Rosa Pérez (Podcast oficial)",
+    "category": "Misterio y otras realidades",
+    "file": "http://files.ivoox.com/listen/3423261",
+    "imgMain": "http://static-1.ivoox.com/audios/1408745050g.jpg",
+    "imgMini": "http://static-1.ivoox.com/usuarios/6251441429674mini.jpg",
+    "link": "http://www.ivoox.com/lupa-casas-malditas-encantadas-con-audios-mp3_rf_3423261_1.html",
+    "title": "La Lupa – “Casas malditas y encantadas” con Joaquín Abenza, J.M Marsella, Jesús..."
   },
   {
-    "author": "Enjoy the sound Podcast with.",
-    "category": "Electrónica",
-    "img": "http://static-1.ivoox.com/audios/1443185336g.jpg",
-    "link": "enjoy-the-sound-radioshow-028-ibiza-live-sessions-audios-mp3_rf_8607271_1.html",
-    "title": "Enjoy the sound RADIOSHOW #028 IBIZA LIVE SESSIONS - Carl Cox Birthday @ Space Ibiza part2",
-    "file": "http://www.ivoox.com/s_me_8607271_1.html"
+    "author": "Contraperiodismo Matrix",
+    "category": "Misterio y otras realidades",
+    "file": "http://files.ivoox.com/listen/9103980",
+    "imgMain": "http://static-1.ivoox.com/canales/6371393915683g.jpg",
+    "imgMini": "http://static-1.ivoox.com/usuarios/1211442557042mini.jpg",
+    "link": "http://www.ivoox.com/211015-contraperiodismo-matrix-nba-iluminati-audios-mp3_rf_9103980_1.html",
+    "title": "211015 contraperiodismo matrix. NBA iluminati."
   }
 ]
 ```

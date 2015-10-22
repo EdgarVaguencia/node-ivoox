@@ -8,9 +8,9 @@ module.exports = {
 
   urlBase: 'http://www.ivoox.com/',
 
-  urlAudios: 'audios_sa_f_1.html?nogallery',
+  urlAudios: 'audios_sa_f_1.html',
 
-  urlPodcasts: 'audios_sc_f_1.html?nogallery',
+  urlPodcasts: 'audios_sc_f_1.html',
 
   type : 1,
 
@@ -63,33 +63,32 @@ module.exports = {
     if (body === undefined) {
       throw new Error('body is needed');
     }
-    body('.audio_list_item').each(function(k ,i) {
-      if (cheerio(i).attr('id') !== 'adsensem') {
-        var img = cheerio(i).find('img.thumb_item');
+    body('.flipper').each(function(k ,i) {
+      if (cheerio(i).find('.modulo-type-banner').length === 0) {
+        var img = cheerio(i).find('img.main');
+        var imgSmall = cheerio(i).find('img.mini');
+        var title = cheerio(i).find('div.content h4 a');
         if (self.type === 1) {
-          var title = cheerio(i).find('a.titulo');
-          var author = cheerio(i).find('.categorias a:first-child');
-          var category = cheerio(i).find('.categorias a:last-child');
+          var author = cheerio(i).find('div.wrapper a');
+          var category = cheerio(i).find('div.content a.rounded-label');
           list.push({
-            'img': img.attr('src'),
+            'imgMain': img.attr('src'),
+            'imgMini': imgSmall.attr('src'),
             'title': title.text(),
             'author': author.text(),
             'category': category.text(),
             'link': title.attr('href'),
-            'file': self.urlBase + '/s_me_' + self.getfile(title.attr('href')) + '_1.html'
+            'file': 'http://files.ivoox.com/listen/' + self.getfile(title.attr('href'))
           });
-        } else if(self.type === 2 || self.type === 3){
-          var nombre = cheerio(i).find('a.tituloPodcast');
-          var audios = cheerio(i).find('span.listen_radio');
+        } else if(self.type === 2){
+          var audios = cheerio(i).find('li.microphone a');
           list.push({
-            'img': img.attr('src'),
-            'name': nombre.text(),
+            'imgMain': img.attr('src'),
+            'imgMini': imgSmall.attr('src'),
+            'name': title.text(),
             'audio': audios.text(),
-            'link': nombre.attr('href')
+            'link': title.attr('href')
           });
-          if (self.type === 3) {
-            self.type = 1;
-          }
         }
       }
     });
@@ -119,7 +118,7 @@ module.exports = {
       throw new Error('topic is needed');
     }
     this.urlRequest = this.urlBase + topic + '_sb.html';
-    this.type = 3;
+    this.type = 1;
     return this._request();
   },
 };
