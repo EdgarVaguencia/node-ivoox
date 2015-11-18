@@ -36,8 +36,8 @@ module.exports = {
   /**
    * Obtiene los audios de la lista explorar audios
    */
-  audios: function() {
-    this.urlRequest = this.urlBase + this.urlAudios;
+  audios: function(url) {
+    this.urlRequest = url !== undefined ? url : this.urlBase + this.urlAudios;
     this.type = 1;
     return this._request();
   },

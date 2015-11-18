@@ -24,7 +24,7 @@ ivoox.audios().then(function(data) { console.log(data) }).catch(function(e) { co
 Methods
 -------
 
-* audios()
+* audios([urlPodcasts])
 * podcasts()
 * search(string)
 
