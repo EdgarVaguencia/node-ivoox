@@ -67,7 +67,7 @@ module.exports = {
       if (cheerio(i).find('.modulo-type-banner').length === 0) {
         var img = cheerio(i).find('img.main');
         var imgSmall = cheerio(i).find('img.mini');
-        var title = cheerio(i).find('div.content h4 a');
+        var title = cheerio(i).find('div.content p.title-wrapper a');
         if (self.type === 1) {
           var author = cheerio(i).find('div.wrapper a');
           var category = cheerio(i).find('div.content a.rounded-label');
