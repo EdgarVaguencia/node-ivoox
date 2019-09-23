@@ -119,5 +119,5 @@ module.exports = {
     this.urlRequest = this.urlBase + topic + '_sb.html'
     this.type = 1
     return this._request()
-  },
-};
+  }
+}
