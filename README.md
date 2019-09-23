@@ -38,7 +38,7 @@ Example of a response
   {
     "author": "La Lupa con Rosa Pérez (Podcast oficial)",
     "category": "Misterio y otras realidades",
-    "file": "http://files.ivoox.com/listen/3423261",
+    "file": "http://ivoox.com/listen_mn_3423261_1.mp3",
     "imgMain": "http://static-1.ivoox.com/audios/1408745050g.jpg",
     "imgMini": "http://static-1.ivoox.com/usuarios/6251441429674mini.jpg",
     "link": "http://www.ivoox.com/lupa-casas-malditas-encantadas-con-audios-mp3_rf_3423261_1.html",
@@ -47,7 +47,7 @@ Example of a response
   {
     "author": "Contraperiodismo Matrix",
     "category": "Misterio y otras realidades",
-    "file": "http://files.ivoox.com/listen/9103980",
+    "file": "http://ivoox.com/listen_mn_9103980_1.mp3",
     "imgMain": "http://static-1.ivoox.com/canales/6371393915683g.jpg",
     "imgMini": "http://static-1.ivoox.com/usuarios/1211442557042mini.jpg",
     "link": "http://www.ivoox.com/211015-contraperiodismo-matrix-nba-iluminati-audios-mp3_rf_9103980_1.html",
