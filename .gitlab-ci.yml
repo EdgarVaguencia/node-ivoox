@@ -3,4 +3,4 @@ image: "node:10"
 test:
   script:
     - yarn
-    - yarn run test-travis
+    - yarn run test-server
