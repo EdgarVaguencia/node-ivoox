@@ -1,6 +1,6 @@
 image "node:10"
 
-test
+test:
   script:
     - yarn
     - yarn run test-travis
