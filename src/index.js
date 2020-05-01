@@ -1,6 +1,6 @@
 'use strict'
-var request = require('request')
-var cheerio = require('cheerio')
+const axios = require('axios')
+const cheerio = require('cheerio')
 
 module.exports = {
 
@@ -18,19 +18,14 @@ module.exports = {
    */
   _request: function () {
     var self = this
-    return new Promise((resolve, reject) => {
-      request.get(self.urlRequest, function (error, response, body) {
-        let errorData = [{
-          status: response.statusCode, message: 'Petición no satisfactoria'
-        }]
-        if (error || response.statusCode !== 200) {
-          reject(errorData)
-        } else {
-          var data = self.format(cheerio.load(body))
-          resolve(data)
-        }
+    return axios.get(self.urlRequest)
+      .then(resp => {
+        var data = self.format(cheerio.load(resp.data))
+        return data
       })
-    })
+      .catch(err => {
+        return err
+      })
   },
 
   /**
