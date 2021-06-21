@@ -7,7 +7,11 @@
     "test-local": "nyc mocha",
     "test-server": "nyc node_modules/mocha/bin/_mocha -R tap",
     "coveralls-local": "yarn test-local && nyc report --reporter=html",
-    "coveralls": "nyc report --reporter=text-lcov | coveralls"
+    "coveralls": "nyc report --reporter=text-lcov | coveralls",
+    "lint": "standard",
+    "postinstall": "husky install",
+    "prepublishOnly": "pinst --disable",
+    "postpublish": "pinst --enable"
   },
   "keywords": [
     "ivoox",
@@ -24,8 +28,11 @@
     "chai": "^4.2.0",
     "chai-as-promised": "^7.1.1",
     "coveralls": "3.1.0",
+    "husky": "^6.0.0",
     "mocha": "7.1.2",
-    "nyc": "15.0.1"
+    "nyc": "15.0.1",
+    "pinst": "^2.1.6",
+    "standard": "^16.0.3"
   },
   "repository": {
     "type": "git",

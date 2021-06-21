@@ -17,10 +17,10 @@ module.exports = {
    * @return {promise}
    */
   _request: function () {
-    var self = this
+    const self = this
     return axios.get(self.urlRequest)
       .then(resp => {
-        var data = self.format(cheerio.load(resp.data))
+        const data = self.format(cheerio.load(resp.data))
         return data
       })
       .catch(err => {
@@ -53,39 +53,39 @@ module.exports = {
    * @return {array}
    */
   format: function (body) {
-    var self = this
-    var list = []
+    const self = this
+    const list = []
     if (body === undefined) {
       throw new Error('body is needed')
     }
-    body('.flipper').not(function (i, e) {
-      return cheerio(this).attr('class') === '.modulo-type-banner'
+    body('.flipper .front').not(function (i, e) {
+      return cheerio(this).attr('class') === 'front modulo-view modulo-type-banner card-native-add'
     }).each(function (k, el) {
-      var img = cheerio(el).find('img.main')
-      var imgSmall = cheerio(el).find('img.mini')
-      var title = cheerio(el).find('div.content p.title-wrapper a')
+      const img = cheerio(el).find('img.main')
+      const imgSmall = cheerio(el).find('img.mini')
+      const title = cheerio(el).find('.content p').has('a').children()
       if (self.type === 1) {
-        var author = cheerio(el).find('div.wrapper a')
-        var category = cheerio(el).find('div.content a.rounded-label')
-        var fileLink = self.getfile(title.attr('href'))
+        const author = cheerio(el).find('div.wrapper a')
+        const category = cheerio(el).find('div.content a.rounded-label')
+        const fileLink = self.getfile(title.attr('href'))
         list.push({
-          'imgMain': img.attr('src'),
-          'imgMini': imgSmall.attr('src'),
-          'title': title.attr('title'),
-          'author': author.attr('title'),
-          'category': category.attr('title'),
-          'link': title.attr('href'),
-          'file': `http://ivoox.com/listen_mn_${fileLink}_1.mp3`
+          imgMain: img.attr('src'),
+          imgMini: imgSmall.attr('src'),
+          title: title.attr('title'),
+          author: author.attr('title'),
+          category: category.attr('title'),
+          link: title.attr('href'),
+          file: `http://ivoox.com/listen_mn_${fileLink}_1.mp3`
         })
       }
       if (self.type === 2) {
-        var audios = cheerio(el).find('li.microphone a')
+        const audios = cheerio(el).find('li.microphone a')
         list.push({
-          'imgMain': img.attr('src'),
-          'imgMini': imgSmall.attr('src'),
-          'name': title.attr('title'),
-          'audio': audios.text(),
-          'link': title.attr('href')
+          imgMain: img.attr('src'),
+          imgMini: imgSmall.attr('src'),
+          name: title.attr('title'),
+          audio: audios.text().trim(),
+          link: title.attr('href')
         })
       }
     })
@@ -98,7 +98,7 @@ module.exports = {
    * @return {string} fileLink
    */
   getfile: function (link) {
-    var fileLink = ''
+    let fileLink = ''
     if (link === undefined || typeof link !== 'string') {
       throw new Error('a link is needed')
     }

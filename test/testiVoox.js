@@ -1,11 +1,11 @@
-var ivoox = require('../src/index.js')
-var chai = require('chai')
-var asPromised = require('chai-as-promised')
+const ivoox = require('../src/index.js')
+const chai = require('chai')
+const asPromised = require('chai-as-promised')
 const mocha = require('mocha')
 
 chai.use(asPromised)
 chai.should()
-let expect = chai.expect
+const expect = chai.expect
 
 mocha.describe('iVoox', function () {
   mocha.it('Is Object', function () {
