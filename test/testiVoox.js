@@ -71,7 +71,7 @@ mocha.describe('iVoox', function () {
     mocha.describe('Page not found', function () {
       mocha.it('Return reject', function () {
         this.timeout(0)
-        return Promise.resolve(ivoox.audios(ivoox.urlBase + 'audios.html')).should.be.rejected
+        return Promise.reject(ivoox.audios(ivoox.urlBase + 'audios.html')).should.be.rejected
       })
     })
   })
