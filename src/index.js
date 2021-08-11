@@ -62,15 +62,17 @@ module.exports = {
       return cheerio(this).attr('class') === 'front modulo-view modulo-type-banner card-native-add'
     }).each(function (k, el) {
       const img = cheerio(el).find('img.main')
+      const urlMain = new URL(img.attr('data-src'))
       const imgSmall = cheerio(el).find('img.mini')
+      const urlSmall = new URL(imgSmall.attr('data-src'))
       const title = cheerio(el).find('.content p').has('a').children()
       if (self.type === 1) {
         const author = cheerio(el).find('div.wrapper a')
         const category = cheerio(el).find('div.content a.rounded-label')
         const fileLink = self.getfile(title.attr('href'))
         list.push({
-          imgMain: img.attr('src'),
-          imgMini: imgSmall.attr('src'),
+          imgMain: urlMain.searchParams.get('url'),
+          imgMini: urlSmall.searchParams.get('url'),
           title: title.attr('title'),
           author: author.attr('title'),
           category: category.attr('title'),
@@ -81,8 +83,8 @@ module.exports = {
       if (self.type === 2) {
         const audios = cheerio(el).find('li.microphone a')
         list.push({
-          imgMain: img.attr('src'),
-          imgMini: imgSmall.attr('src'),
+          imgMain: urlMain.searchParams.get('url'),
+          imgMini: urlSmall.searchParams.get('url'),
           name: title.attr('title'),
           audio: audios.text().trim(),
           link: title.attr('href')
