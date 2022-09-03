@@ -66,6 +66,7 @@ module.exports = {
       const imgSmall = cheerio(el).find('img.mini')
       const urlSmall = new URL(imgSmall.attr('data-src'))
       const title = cheerio(el).find('.content p').has('a').children()
+      const date = cheerio(el).find('.date').attr('title')
       if (self.type === 1) {
         const author = cheerio(el).find('div.wrapper a')
         const category = cheerio(el).find('div.content a.rounded-label')
@@ -76,6 +77,7 @@ module.exports = {
           title: title.attr('title'),
           author: author.attr('title'),
           category: category.attr('title'),
+          date,
           link: title.attr('href'),
           file: `http://ivoox.com/listen_mn_${fileLink}_1.mp3`
         })
