@@ -66,6 +66,7 @@ module.exports = {
       const imgSmall = cheerio(el).find('img.mini')
       const urlSmall = new URL(imgSmall.attr('data-src'))
       const title = cheerio(el).find('.content p').has('a').children()
+      const popoverInfo = cheerio(el).find('.content p').find('.audio-description button')
       const date = cheerio(el).find('.date').attr('title')
       if (self.type === 1) {
         const author = cheerio(el).find('div.wrapper a')
@@ -75,6 +76,7 @@ module.exports = {
           imgMain: urlMain.searchParams.get('url'),
           imgMini: urlSmall.searchParams.get('url'),
           title: title.attr('title'),
+          description: popoverInfo.attr('data-content'),
           author: author.attr('title'),
           category: category.attr('title'),
           date,
